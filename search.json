@@ -147,6 +147,62 @@
     "text": "패키지 삭제\n패키지를 삭제하고자 하는 경우에는 다음과 같이 pip uninstall 명령을 사용할 수 있습니다.\npip uninstall 제거하고자하는_패키지_이름 [제거하고자하는_패키지_이름]"
   },
   {
+    "objectID": "posts/0005_check_tutorial1/index.html",
+    "href": "posts/0005_check_tutorial1/index.html",
+    "title": "CHECK-API 사용법 1",
+    "section": "",
+    "text": "본 글에서는 파이썬 언어로 CHECK-API를 호출하고 사용하는 방법을 설명합니다."
+  },
+  {
+    "objectID": "posts/0005_check_tutorial1/index.html#준비사항",
+    "href": "posts/0005_check_tutorial1/index.html#준비사항",
+    "title": "CHECK-API 사용법 1",
+    "section": "준비사항",
+    "text": "준비사항\n여기에서는 컴퓨터에 이미 Mambaforge 기반의 파이썬 배포판과 주피터랩이 설치되어 있다고 가정합니다.\n만약 파이썬 배포판이 설치되어 있지 않은 경우에는 다음 블로그 글을 참고하여 설치해 주세요.\n\n환경 구축 1 : 파이썬 설치\n\n만약 주피터랩이 설치되어 있지 않은 경우에는 다음 블로그 글을 참고하여 설치해 주세요.\n\n환경 구축 3 : 주피터랩 설치 및 사용\n\n본 설명글은 주피터랩에서 노트북으로 진행합니다."
+  },
+  {
+    "objectID": "posts/0005_check_tutorial1/index.html#requests-패키지-설치",
+    "href": "posts/0005_check_tutorial1/index.html#requests-패키지-설치",
+    "title": "CHECK-API 사용법 1",
+    "section": "requests 패키지 설치",
+    "text": "requests 패키지 설치\n파이썬으로 CHECK-API를 호출하여 사용하기 위해서는 requests 파이썬 패키지가 필요합니다. requests 패키지는 명령 프롬프트에서 다음과 같이 pip 명령으로 설치할 수 있습니다.\npip install requests\npip 명령을 사용한 패키지 설치에 대한 자세한 내용을 다음 블로그 글을 참조하시면 됩니다.\n\n환경 구축 2 : 파이썬 패키지 설치"
+  },
+  {
+    "objectID": "posts/0005_check_tutorial1/index.html#check-api-아이디-및-인증키-확인",
+    "href": "posts/0005_check_tutorial1/index.html#check-api-아이디-및-인증키-확인",
+    "title": "CHECK-API 사용법 1",
+    "section": "CHECK-API 아이디 및 인증키 확인",
+    "text": "CHECK-API 아이디 및 인증키 확인\nCHECK-API를 호출하기 위해서는 CHECK-API 아이디와 인증키가 필요합니다. CHECK-API 서비스를 신청한 고객은 CHECK 단말기에서 아이디와 인증키를 확인할 수 있습니다. 자세한 방법은 CHECK-API 공식 홈페이지를 참고하시면 됩니다.\n\nhttps://checkapi.koscom.co.kr/intro/introhome\n\n본 설명글에서는 확인한 아이디 및 인증키를 다음과 같이 변수에 넣어 사용합니다. 본 예제 코드는 파이썬 코드로 아이디 및 인증키의 값은 가상의 코드입니다. 실제 값은 사용자마다 다릅니다.\n코드 셀 1 이 코드를 주피터랩에서 실행합니다.\n\n# 코드 셀 1 (이 코드를 주피터랩에서 실행합니다.)\n\n1CHECK_API_ID = \"id_xxxxxxx\"\n2CHECK_API_KEY = \"key_xxxxxxx\"\n\n\n1\n\nCHECK-API 아이디 값을 문자열로 저장\n\n2\n\nCHECK-API 인증키 값을 문자열로 저장"
+  },
+  {
+    "objectID": "posts/0005_check_tutorial1/index.html#사용하고자-하는-api의-명세-확인",
+    "href": "posts/0005_check_tutorial1/index.html#사용하고자-하는-api의-명세-확인",
+    "title": "CHECK-API 사용법 1",
+    "section": "사용하고자 하는 API의 명세 확인",
+    "text": "사용하고자 하는 API의 명세 확인\n우선 CHECK-API 공식 홈페이지에서 사용하고자 하는 API의 명세(specification)를 확인합니다. API 명세는 다음과 같은 사항으로 구성되어 있습니다.\n\n호출 명세 (Request)\n\n호출 주소 (URL)\n\n호스트 주소 (HOST URL)\nAPI 주소 (API URL)\n\n인수 (Parameter)\n\n결과 명세 (Response)\n\n호출 결과\n데이터 필드 (Data Set)\n오류 메시지 (Error Message)\n\n\n예를 들어 주식종목의 코드정보를 호출하는 API의 명세는 다음 CHECK-API 공식홈페이지에 나와있습니다.\n\nhttps://checkapi.koscom.co.kr/stock/m001code\n\n주식종목 코드정보 API의 호출 명세를 보여주는 화면은 다음과 같습니다.\n\n\n\n그림 1: 주식종목 코드정보 API의 호출 명세\n\n\n주식종목 코드정보 API의 결과 명세를 보여주는 화면은 다음과 같습니다.\n\n\n\n그림 2: 주식종목 코드정보 API의 결과 명세"
+  },
+  {
+    "objectID": "posts/0005_check_tutorial1/index.html#api-호출",
+    "href": "posts/0005_check_tutorial1/index.html#api-호출",
+    "title": "CHECK-API 사용법 1",
+    "section": "API 호출",
+    "text": "API 호출\n우선 API 명세 화면에서 보여주는 해당 API의 호출정보를 다음과 같이 파이썬 코드로 저장합니다.\n코드 셀 2\n\n# 코드 셀 2\n\n1host_url = \"https://checkapi.koscom.co.kr\"\n2api_url = \"/stock/m001/code_info\"\npayload = {\n    \"cust_id\": CHECK_API_ID,\n    \"auth_key\": CHECK_API_KEY,\n3}\n\n\n1\n\n호스트 주소를 문자열로 저장\n\n2\n\nAPI 주소를 문자열로 저장\n\n3\n\n인수를 딕셔너리로 저장\n\n\n\n\n저장된 호출정보를 기반으로 requests 패키지의 POST 호출 기능을 사용하여 다음과 같이 API 호출을 할 수 있습니다.\n코드 셀 3\n\n1from requests import post\n\n2r = post(host_url + api_url, data=payload)\n\n\n1\n\nrequests 패키지에서 post 함수 임포트\n\n2\n\nAPI를 호출하여 결과를 변수 r에 넣음"
+  },
+  {
+    "objectID": "posts/0005_check_tutorial1/index.html#호출-결과",
+    "href": "posts/0005_check_tutorial1/index.html#호출-결과",
+    "title": "CHECK-API 사용법 1",
+    "section": "호출 결과",
+    "text": "호출 결과\n호출결과는 Response 형식으로 저장되며 status_code 속성으로 HTTP 호출결과를 볼 수 있습니다. status_code 속성이 200인 경우 호출 자체는 정상적으로 이루어진 경우입니다.\n코드 셀 4\n\ntype(r)\n\nrequests.models.Response\n\n\n코드 셀 5\n\nr.status_code\n\n200\n\n\n실제 데이터는 Response 객체의 json() 메서드를 호출하여 얻을 수 있습니다. json() 메서드는 success, results 키를 가지는 딕셔너리 객체입니다.\n\nsuccess: 데이터가 정상적으로 반환되었는지 여부. CHECK-API 아이디/인증키가 맞지 않거나 기타 올바른 인수를 받지 못하여 정상적인 results 값이 없는 경우 또는 해당하는 데이터가 존재하지 않는 경우 False 값을 반환합니다.\nresults: 딕셔너리 형태의 데이터 셋\n\n코드 셀 6\n\ndata = r.json()\n\n코드 셀 7\n\ndata.keys()\n\ndict_keys(['success', 'results'])\n\n\n코드 셀 8\n\ndata[\"success\"]\n\nTrue\n\n\njson 데이터의 results 값에 API 결과 명세에 따른 실제 데이터 셋이 반환됩니다. 대부분의 경우 딕셔너리의 리스트(list of dictionary) 형식입니다.\n예제의 주식종목 코드정보의 경우 전종목의 코드정보가 반환되므로 일부 데이터만 살펴보면 다음과 같습니다.\n코드 셀 9\n\nresults = data[\"results\"]\n\nresults[:5]\n\n[{'F16012': 'KR7000020008',\n  'F16013': '000020',\n  'F16002': '동화약품',\n  'F16004': 'DongwhaPharm',\n  'F34501': 'ST',\n  'F18070': 0},\n {'F16012': 'KR7000040006',\n  'F16013': '000040',\n  'F16002': 'KR모터스',\n  'F16004': 'KR MOTORS',\n  'F34501': 'ST',\n  'F18070': 0},\n {'F16012': 'KR7000050005',\n  'F16013': '000050',\n  'F16002': '경방',\n  'F16004': 'Kyungbang',\n  'F34501': 'ST',\n  'F18070': 0},\n {'F16012': 'KR7000070003',\n  'F16013': '000070',\n  'F16002': '삼양홀딩스',\n  'F16004': 'SAMYANGHOLDINGS',\n  'F34501': 'ST',\n  'F18070': 0},\n {'F16012': 'KR7000071001',\n  'F16013': '000075',\n  'F16002': '삼양홀딩스우',\n  'F16004': 'SAMYANGHOLDINGS(1P)',\n  'F34501': 'ST',\n  'F18070': 0}]"
+  },
+  {
+    "objectID": "posts/0005_check_tutorial1/index.html#잘못된-호출의-경우",
+    "href": "posts/0005_check_tutorial1/index.html#잘못된-호출의-경우",
+    "title": "CHECK-API 사용법 1",
+    "section": "잘못된 호출의 경우",
+    "text": "잘못된 호출의 경우\n다음과 같은 경우에는 API 호출로 올바른 데이터를 얻지 못할 수 있습니다.\n\n호출 URL이 잘못된 경우\n인수가 잘못된 경우\n\n\n호출 URL이 잘못된 경우\nAPI 호출 URL이 잘못되어 API 호출 자체가 실패한 경우에는 반환된 status_code가 200이 아닌 값을 가집니다.\n코드 셀 10\n\n1api_url = \"/stock/m001/codeinfo\"\n\nr = post(host_url + api_url, data=payload)\n\nr.status_code\n\n\n1\n\n올바른 URL이 code_info인데 잘못하여 codeinfo로 호출한 경우\n\n\n\n\n404\n\n\n\n\n인수가 잘못된 경우\n정상적으로 API 호출은 되었으나 인수가 잘못된 경우에는 status_code는 200 정상 코드가 나오지만 json 데이터의 success 필드의 값이 False가 나옵니다. 또한 json 데이터에 results 필드가 존재하지 않습니다.\n코드 셀 11\n\n1api_url = \"/stock/m001/code_info\"\npayload = {\n    \"cust_id\": \"wrong_id\",\n    \"auth_key\": \"wrong_key\",\n2}\n\nr = post(host_url + api_url, data=payload)\n\nprint(r.status_code)\nprint(r.json()[\"success\"])\n\n\n1\n\n올바른 URL로 호출\n\n2\n\n아이디와 인증키 값이 잘못됨\n\n\n\n\n200\nFalse\n\n\n코드 셀 12\n\nr.json()[\"results\"]\n\nKeyError: 'results'"
+  },
+  {
     "objectID": "posts/0001_intro/index.html",
     "href": "posts/0001_intro/index.html",
     "title": "웹사이트 소개",
@@ -186,6 +242,6 @@
     "href": "index.html",
     "title": "CHECK API 활용",
     "section": "",
-    "text": "정렬\n       디폴트\n         \n          제목\n        \n         \n          날짜 - 날짜(오름차순)\n        \n         \n          날짜 - 날짜(내림차순)\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\n환경 구축 3 : 주피터랩 설치 및 사용\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-12-12\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 2 : 파이썬 패키지 설치\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-11-30\n\n\n\n\n\n\n\n\n\n\n\n\n웹사이트 소개\n\n\n\n\n\n\n뉴스\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 1 : 파이썬 설치\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n일치 없음"
+    "text": "정렬\n       디폴트\n         \n          제목\n        \n         \n          날짜 - 날짜(오름차순)\n        \n         \n          날짜 - 날짜(내림차순)\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nCHECK-API 사용법 1\n\n\n\n\n\n\nCHECK-API 사용법\n\n\n\n\n\n\n\n\n\n2023-12-21\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 3 : 주피터랩 설치 및 사용\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-12-12\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 2 : 파이썬 패키지 설치\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-11-30\n\n\n\n\n\n\n\n\n\n\n\n\n웹사이트 소개\n\n\n\n\n\n\n뉴스\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 1 : 파이썬 설치\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n일치 없음"
   }
 ]

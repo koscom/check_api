@@ -10,7 +10,403 @@
 <atom:link href="https://koscom.github.io/check_api/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.502</generator>
-<lastBuildDate>Mon, 11 Dec 2023 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 20 Dec 2023 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>CHECK-API 사용법 1</title>
+  <link>https://koscom.github.io/check_api/posts/0005_check_tutorial1/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>본 글에서는 파이썬 언어로 CHECK-API를 호출하고 사용하는 방법을 설명합니다.</p>
+<section id="준비사항" class="level2">
+<h2 class="anchored" data-anchor-id="준비사항">준비사항</h2>
+<p>여기에서는 컴퓨터에 이미 Mambaforge 기반의 파이썬 배포판과 주피터랩이 설치되어 있다고 가정합니다.</p>
+<p>만약 파이썬 배포판이 설치되어 있지 않은 경우에는 다음 블로그 글을 참고하여 설치해 주세요.</p>
+<ul>
+<li><a href="../../posts/0002_env_install_1/index.html" target="_blank">환경 구축 1 : 파이썬 설치</a></li>
+</ul>
+<p>만약 주피터랩이 설치되어 있지 않은 경우에는 다음 블로그 글을 참고하여 설치해 주세요.</p>
+<ul>
+<li><a href="../../posts/0003_env_install_2/index.html" target="_blank">환경 구축 3 : 주피터랩 설치 및 사용</a></li>
+</ul>
+<p>본 설명글은 주피터랩에서 노트북으로 진행합니다.</p>
+</section>
+<section id="requests-패키지-설치" class="level2">
+<h2 class="anchored" data-anchor-id="requests-패키지-설치">requests 패키지 설치</h2>
+<p>파이썬으로 CHECK-API를 호출하여 사용하기 위해서는 requests 파이썬 패키지가 필요합니다. requests 패키지는 명령 프롬프트에서 다음과 같이 pip 명령으로 설치할 수 있습니다.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install requests</span></code></pre></div>
+<p>pip 명령을 사용한 패키지 설치에 대한 자세한 내용을 다음 블로그 글을 참조하시면 됩니다.</p>
+<ul>
+<li><a href="../../posts/0003_env_install_2/index.html" target="_blank">환경 구축 2 : 파이썬 패키지 설치</a></li>
+</ul>
+</section>
+<section id="check-api-아이디-및-인증키-확인" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="check-api-아이디-및-인증키-확인">CHECK-API 아이디 및 인증키 확인</h2>
+<p>CHECK-API를 호출하기 위해서는 CHECK-API 아이디와 인증키가 필요합니다. CHECK-API 서비스를 신청한 고객은 CHECK 단말기에서 아이디와 인증키를 확인할 수 있습니다. 자세한 방법은 CHECK-API 공식 홈페이지를 참고하시면 됩니다.</p>
+<ul>
+<li><a href="https://checkapi.koscom.co.kr/intro/introhome" target="_blank">https://checkapi.koscom.co.kr/intro/introhome</a></li>
+</ul>
+<p>본 설명글에서는 확인한 아이디 및 인증키를 다음과 같이 변수에 넣어 사용합니다. 본 예제 코드는 파이썬 코드로 아이디 및 인증키의 값은 가상의 코드입니다. 실제 값은 사용자마다 다릅니다.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 1 <br>이 코드를 주피터랩에서 실행합니다.</span></div></div>
+<div id="cell-11" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-2" style="background: #f1f3f5;"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 코드 셀 1 (이 코드를 주피터랩에서 실행합니다.)</span></span>
+<span id="annotated-cell-2-2"></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-3" class="code-annotation-target">CHECK_API_ID <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id_xxxxxxx"</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-4" class="code-annotation-target">CHECK_API_KEY <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"key_xxxxxxx"</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="1">CHECK-API 아이디 값을 문자열로 저장</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="2">CHECK-API 인증키 값을 문자열로 저장</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="사용하고자-하는-api의-명세-확인" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="사용하고자-하는-api의-명세-확인">사용하고자 하는 API의 명세 확인</h2>
+<p>우선 CHECK-API 공식 홈페이지에서 사용하고자 하는 API의 명세(specification)를 확인합니다. API 명세는 다음과 같은 사항으로 구성되어 있습니다.</p>
+<ul>
+<li>호출 명세 (Request)
+<ul>
+<li>호출 주소 (URL)
+<ul>
+<li>호스트 주소 (HOST URL)</li>
+<li>API 주소 (API URL)</li>
+</ul></li>
+<li>인수 (Parameter)</li>
+</ul></li>
+<li>결과 명세 (Response)
+<ul>
+<li>호출 결과</li>
+<li>데이터 필드 (Data Set)</li>
+<li>오류 메시지 (Error Message)</li>
+</ul></li>
+</ul>
+<p>예를 들어 주식종목의 코드정보를 호출하는 API의 명세는 다음 CHECK-API 공식홈페이지에 나와있습니다.</p>
+<ul>
+<li><a href="https://checkapi.koscom.co.kr/stock/m001code" target="_blank">https://checkapi.koscom.co.kr/stock/m001code</a></li>
+</ul>
+<p>주식종목 코드정보 API의 호출 명세를 보여주는 화면은 다음과 같습니다.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://koscom.github.io/check_api/posts/0005_check_tutorial1/CHECK-API_1.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 1: 주식종목 코드정보 API의 호출 명세</figcaption>
+</figure>
+</div>
+<p>주식종목 코드정보 API의 결과 명세를 보여주는 화면은 다음과 같습니다.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://koscom.github.io/check_api/posts/0005_check_tutorial1/CHECK-API_2.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 2: 주식종목 코드정보 API의 결과 명세</figcaption>
+</figure>
+</div>
+</section>
+<section id="api-호출" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="api-호출">API 호출</h2>
+<p>우선 API 명세 화면에서 보여주는 해당 API의 호출정보를 다음과 같이 파이썬 코드로 저장합니다.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 2</span></div></div>
+<div id="cell-22" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="annotated-cell-3" style="background: #f1f3f5;"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 코드 셀 2</span></span>
+<span id="annotated-cell-3-2"></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-3" class="code-annotation-target">host_url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://checkapi.koscom.co.kr"</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-4" class="code-annotation-target">api_url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/stock/m001/code_info"</span></span>
+<span id="annotated-cell-3-5">payload <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="annotated-cell-3-6">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cust_id"</span>: CHECK_API_ID,</span>
+<span id="annotated-cell-3-7">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"auth_key"</span>: CHECK_API_KEY,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-8" class="code-annotation-target">}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="1">호스트 주소를 문자열로 저장</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="2">API 주소를 문자열로 저장</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="3">인수를 딕셔너리로 저장</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>저장된 호출정보를 기반으로 requests 패키지의 POST 호출 기능을 사용하여 다음과 같이 API 호출을 할 수 있습니다.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 3</span></div></div>
+<div id="cell-26" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="annotated-cell-4" style="background: #f1f3f5;"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> requests <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> post</span>
+<span id="annotated-cell-4-2"></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target">r <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> post(host_url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> api_url, data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>payload)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">requests 패키지에서 post 함수 임포트</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="2">API를 호출하여 결과를 변수 r에 넣음</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="호출-결과" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="호출-결과">호출 결과</h2>
+<p>호출결과는 <code>Response</code> 형식으로 저장되며 <code>status_code</code> 속성으로 HTTP 호출결과를 볼 수 있습니다. <code>status_code</code> 속성이 <code>200</code>인 경우 호출 자체는 정상적으로 이루어진 경우입니다.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 4</span></div></div>
+<div id="cell-31" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">type</span>(r)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>requests.models.Response</code></pre>
+</div>
+</div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 5</span></div></div>
+<div id="cell-33" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1">r.status_code</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>200</code></pre>
+</div>
+</div>
+<p>실제 데이터는 <code>Response</code> 객체의 <code>json()</code> 메서드를 호출하여 얻을 수 있습니다. <code>json()</code> 메서드는 <code>success</code>, <code>results</code> 키를 가지는 딕셔너리 객체입니다.</p>
+<ul>
+<li><code>success</code>: 데이터가 정상적으로 반환되었는지 여부. CHECK-API 아이디/인증키가 맞지 않거나 기타 올바른 인수를 받지 못하여 정상적인 <code>results</code> 값이 없는 경우 또는 해당하는 데이터가 존재하지 않는 경우 <code>False</code> 값을 반환합니다.</li>
+<li><code>results</code>: 딕셔너리 형태의 데이터 셋</li>
+</ul>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 6</span></div></div>
+<div id="cell-36" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> r.json()</span></code></pre></div>
+</div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 7</span></div></div>
+<div id="cell-38" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1">data.keys()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>dict_keys(['success', 'results'])</code></pre>
+</div>
+</div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 8</span></div></div>
+<div id="cell-40" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1">data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"success"</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>True</code></pre>
+</div>
+</div>
+<p>json 데이터의 <code>results</code> 값에 API 결과 명세에 따른 실제 데이터 셋이 반환됩니다. 대부분의 경우 딕셔너리의 리스트(list of dictionary) 형식입니다.</p>
+<p>예제의 주식종목 코드정보의 경우 전종목의 코드정보가 반환되므로 일부 데이터만 살펴보면 다음과 같습니다.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 9</span></div></div>
+<div id="cell-43" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1">results <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"results"</span>]</span>
+<span id="cb11-2"></span>
+<span id="cb11-3">results[:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>[{'F16012': 'KR7000020008',
+  'F16013': '000020',
+  'F16002': '동화약품',
+  'F16004': 'DongwhaPharm',
+  'F34501': 'ST',
+  'F18070': 0},
+ {'F16012': 'KR7000040006',
+  'F16013': '000040',
+  'F16002': 'KR모터스',
+  'F16004': 'KR MOTORS',
+  'F34501': 'ST',
+  'F18070': 0},
+ {'F16012': 'KR7000050005',
+  'F16013': '000050',
+  'F16002': '경방',
+  'F16004': 'Kyungbang',
+  'F34501': 'ST',
+  'F18070': 0},
+ {'F16012': 'KR7000070003',
+  'F16013': '000070',
+  'F16002': '삼양홀딩스',
+  'F16004': 'SAMYANGHOLDINGS',
+  'F34501': 'ST',
+  'F18070': 0},
+ {'F16012': 'KR7000071001',
+  'F16013': '000075',
+  'F16002': '삼양홀딩스우',
+  'F16004': 'SAMYANGHOLDINGS(1P)',
+  'F34501': 'ST',
+  'F18070': 0}]</code></pre>
+</div>
+</div>
+</section>
+<section id="잘못된-호출의-경우" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="잘못된-호출의-경우">잘못된 호출의 경우</h2>
+<p>다음과 같은 경우에는 API 호출로 올바른 데이터를 얻지 못할 수 있습니다.</p>
+<ul>
+<li>호출 URL이 잘못된 경우</li>
+<li>인수가 잘못된 경우</li>
+</ul>
+<section id="호출-url이-잘못된-경우" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="호출-url이-잘못된-경우">호출 URL이 잘못된 경우</h3>
+<p>API 호출 URL이 잘못되어 API 호출 자체가 실패한 경우에는 반환된 <code>status_code</code>가 200이 아닌 값을 가집니다.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 10</span></div></div>
+<div id="cell-49" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="annotated-cell-11" style="background: #f1f3f5;"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-1" class="code-annotation-target">api_url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/stock/m001/codeinfo"</span></span>
+<span id="annotated-cell-11-2"></span>
+<span id="annotated-cell-11-3">r <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> post(host_url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> api_url, data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>payload)</span>
+<span id="annotated-cell-11-4"></span>
+<span id="annotated-cell-11-5">r.status_code</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="1" data-code-annotation="1">올바른 URL이 <code>code_info</code>인데 잘못하여 <code>codeinfo</code>로 호출한 경우</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>404</code></pre>
+</div>
+</div>
+</section>
+<section id="인수가-잘못된-경우" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="인수가-잘못된-경우">인수가 잘못된 경우</h3>
+<p>정상적으로 API 호출은 되었으나 인수가 잘못된 경우에는 <code>status_code</code>는 <code>200</code> 정상 코드가 나오지만 json 데이터의 <code>success</code> 필드의 값이 <code>False</code>가 나옵니다. 또한 json 데이터에 <code>results</code> 필드가 존재하지 않습니다.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 11</span></div></div>
+<div id="cell-54" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="annotated-cell-12" style="background: #f1f3f5;"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-1" class="code-annotation-target">api_url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/stock/m001/code_info"</span></span>
+<span id="annotated-cell-12-2">payload <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="annotated-cell-12-3">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cust_id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"wrong_id"</span>,</span>
+<span id="annotated-cell-12-4">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"auth_key"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"wrong_key"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-5" class="code-annotation-target">}</span>
+<span id="annotated-cell-12-6"></span>
+<span id="annotated-cell-12-7">r <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> post(host_url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> api_url, data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>payload)</span>
+<span id="annotated-cell-12-8"></span>
+<span id="annotated-cell-12-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(r.status_code)</span>
+<span id="annotated-cell-12-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(r.json()[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"success"</span>])</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="1" data-code-annotation="1">올바른 URL로 호출</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="5" data-code-annotation="2">아이디와 인증키 값이 잘못됨</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>200
+False</code></pre>
+</div>
+</div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">코드 셀 12</span></div></div>
+<div id="cell-57" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1">r.json()[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"results"</span>]</span></code></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>KeyError: 'results'</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>CHECK-API 사용법</category>
+  <guid>https://koscom.github.io/check_api/posts/0005_check_tutorial1/</guid>
+  <pubDate>Wed, 20 Dec 2023 15:00:00 GMT</pubDate>
+  <media:content url="https://koscom.github.io/check_api/posts/0005_check_tutorial1/CHECK API_black.png" medium="image" type="image/png" height="22" width="144"/>
+</item>
 <item>
   <title>환경 구축 3 : 주피터랩 설치 및 사용</title>
   <link>https://koscom.github.io/check_api/posts/0004_env_install_3/</link>

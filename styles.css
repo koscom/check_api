@@ -3,3 +3,9 @@
 * {
   word-break: keep-all;
 }
+
+main.content div.cell div.cell-output pre code {
+  padding: 5px;
+  border: 1px solid rgb(149, 165, 166);
+  border-radius: 5px;
+}
