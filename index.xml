@@ -10,7 +10,100 @@
 <atom:link href="https://koscom.github.io/check_api/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.502</generator>
-<lastBuildDate>Wed, 20 Dec 2023 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 02 Jan 2024 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>CHECK-API 사용량 확인 방법</title>
+  <link>https://koscom.github.io/check_api/posts/0006_check_quota/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>본 글에서는 CHECK-API의 사용량을 확인하는 방법을 설명합니다.</p>
+<section id="check-api-사용량-제한" class="level2">
+<h2 class="anchored" data-anchor-id="check-api-사용량-제한">CHECK-API 사용량 제한</h2>
+<p>CHECK-API는 사용 요금제에 따라 사용량을 제한하고 있습니다. 각 요금제에 따른 사용량 제한은 다음과 같습니다.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>분류</th>
+<th>LEVEL</th>
+<th>일간 API 사용량</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CHECK 사용자</td>
+<td>BASIC</td>
+<td>0.2 GB / 일</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>PLUS</td>
+<td>0.5 GB / 일</td>
+</tr>
+<tr class="odd">
+<td>CHECK 미사용자</td>
+<td>Lv.1</td>
+<td>1.0 GB / 일</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>Lv.2</td>
+<td>5.0 GB / 일</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>Lv.3</td>
+<td>10.0 GB / 일</td>
+</tr>
+</tbody>
+</table>
+<p>사용량을 초과하여 사용하는 경우 별도의 공지 없이 사용이 제한될 수도 있으므로 사용에 유의해 주시기 바랍니다.</p>
+</section>
+<section id="check-api-사용량-확인-방법" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="check-api-사용량-확인-방법">CHECK-API 사용량 확인 방법</h2>
+<p>CHECK-API 사용량은 CHECK-API 공식 홈페이지에서 로그인하여 확인할 수 있습니다.</p>
+<ul>
+<li><a href="https://checkapi.koscom.co.kr/" target="_blank">https://checkapi.koscom.co.kr/</a></li>
+</ul>
+<ol type="1">
+<li>홈페이지에 ID와 인증키(API-KEY) 값을 입력하여 로그인합니다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://koscom.github.io/check_api/posts/0006_check_quota/check_api_quota_1.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 1: CHECK-API 홈페이지 로그인 화면</figcaption>
+</figure>
+</div>
+<ol start="2" type="1">
+<li>로그인 후 나타나는 우측 상단의 아이디 부분을 클릭합니다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://koscom.github.io/check_api/posts/0006_check_quota/check_api_quota_2.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 2: 사용량 확인 방법</figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>1일 사용한도 및 현재 당일 사용량 등의 사용 정보가 표시됩니다.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://koscom.github.io/check_api/posts/0006_check_quota/check_api_quota_3.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 3: CHECK-API 사용량 확인 화면</figcaption>
+</figure>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>CHECK-API 사용법</category>
+  <guid>https://koscom.github.io/check_api/posts/0006_check_quota/</guid>
+  <pubDate>Tue, 02 Jan 2024 15:00:00 GMT</pubDate>
+  <media:content url="https://koscom.github.io/check_api/posts/0006_check_quota/check_api_quota_3.png" medium="image" type="image/png" height="79" width="144"/>
+</item>
 <item>
   <title>CHECK-API 사용법 1</title>
   <link>https://koscom.github.io/check_api/posts/0005_check_tutorial1/</link>
@@ -683,6 +776,7 @@ font-style: inherit;">5</span>))</span>
 
  ]]></description>
   <category>환경구축</category>
+  <category>Python</category>
   <guid>https://koscom.github.io/check_api/posts/0004_env_install_3/</guid>
   <pubDate>Mon, 11 Dec 2023 15:00:00 GMT</pubDate>
   <media:content url="https://koscom.github.io/check_api/posts/0004_env_install_3/jupyterlab_log.png" medium="image" type="image/png" height="72" width="144"/>
@@ -847,6 +941,7 @@ font-style: inherit;">]</span></span></code></pre></div>
 
  ]]></description>
   <category>환경구축</category>
+  <category>Python</category>
   <guid>https://koscom.github.io/check_api/posts/0003_env_install_2/</guid>
   <pubDate>Wed, 29 Nov 2023 15:00:00 GMT</pubDate>
   <media:content url="https://koscom.github.io/check_api/posts/0003_env_install_2/pip_logo.png" medium="image" type="image/png" height="77" width="144"/>
@@ -1269,6 +1364,7 @@ font-style: inherit;">conda</span> activate</span></code></pre></div>
 
  ]]></description>
   <category>환경구축</category>
+  <category>Python</category>
   <guid>https://koscom.github.io/check_api/posts/0002_env_install_1/</guid>
   <pubDate>Tue, 21 Nov 2023 15:00:00 GMT</pubDate>
   <media:content url="https://koscom.github.io/check_api/posts/0002_env_install_1/miniforge_06.png" medium="image" type="image/png" height="81" width="144"/>

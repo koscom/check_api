@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/0006_check_quota/index.html",
       "/posts/0005_check_tutorial1/index.html",
       "/posts/0004_env_install_3/index.html",
       "/posts/0003_env_install_2/index.html",

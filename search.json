@@ -147,6 +147,27 @@
     "text": "패키지 삭제\n패키지를 삭제하고자 하는 경우에는 다음과 같이 pip uninstall 명령을 사용할 수 있습니다.\npip uninstall 제거하고자하는_패키지_이름 [제거하고자하는_패키지_이름]"
   },
   {
+    "objectID": "posts/0006_check_quota/index.html",
+    "href": "posts/0006_check_quota/index.html",
+    "title": "CHECK-API 사용량 확인 방법",
+    "section": "",
+    "text": "본 글에서는 CHECK-API의 사용량을 확인하는 방법을 설명합니다."
+  },
+  {
+    "objectID": "posts/0006_check_quota/index.html#check-api-사용량-제한",
+    "href": "posts/0006_check_quota/index.html#check-api-사용량-제한",
+    "title": "CHECK-API 사용량 확인 방법",
+    "section": "CHECK-API 사용량 제한",
+    "text": "CHECK-API 사용량 제한\nCHECK-API는 사용 요금제에 따라 사용량을 제한하고 있습니다. 각 요금제에 따른 사용량 제한은 다음과 같습니다.\n\n\n\n분류\nLEVEL\n일간 API 사용량\n\n\n\n\nCHECK 사용자\nBASIC\n0.2 GB / 일\n\n\n-\nPLUS\n0.5 GB / 일\n\n\nCHECK 미사용자\nLv.1\n1.0 GB / 일\n\n\n-\nLv.2\n5.0 GB / 일\n\n\n-\nLv.3\n10.0 GB / 일\n\n\n\n사용량을 초과하여 사용하는 경우 별도의 공지 없이 사용이 제한될 수도 있으므로 사용에 유의해 주시기 바랍니다."
+  },
+  {
+    "objectID": "posts/0006_check_quota/index.html#check-api-사용량-확인-방법",
+    "href": "posts/0006_check_quota/index.html#check-api-사용량-확인-방법",
+    "title": "CHECK-API 사용량 확인 방법",
+    "section": "CHECK-API 사용량 확인 방법",
+    "text": "CHECK-API 사용량 확인 방법\nCHECK-API 사용량은 CHECK-API 공식 홈페이지에서 로그인하여 확인할 수 있습니다.\n\nhttps://checkapi.koscom.co.kr/\n\n\n홈페이지에 ID와 인증키(API-KEY) 값을 입력하여 로그인합니다.\n\n\n\n\n그림 1: CHECK-API 홈페이지 로그인 화면\n\n\n\n로그인 후 나타나는 우측 상단의 아이디 부분을 클릭합니다.\n\n\n\n\n그림 2: 사용량 확인 방법\n\n\n\n1일 사용한도 및 현재 당일 사용량 등의 사용 정보가 표시됩니다.\n\n\n\n\n그림 3: CHECK-API 사용량 확인 화면"
+  },
+  {
     "objectID": "posts/0005_check_tutorial1/index.html",
     "href": "posts/0005_check_tutorial1/index.html",
     "title": "CHECK-API 사용법 1",
@@ -242,6 +263,6 @@
     "href": "index.html",
     "title": "CHECK API 활용",
     "section": "",
-    "text": "정렬\n       디폴트\n         \n          제목\n        \n         \n          날짜 - 날짜(오름차순)\n        \n         \n          날짜 - 날짜(내림차순)\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nCHECK-API 사용법 1\n\n\n\n\n\n\nCHECK-API 사용법\n\n\n\n\n\n\n\n\n\n2023-12-21\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 3 : 주피터랩 설치 및 사용\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-12-12\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 2 : 파이썬 패키지 설치\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-11-30\n\n\n\n\n\n\n\n\n\n\n\n\n웹사이트 소개\n\n\n\n\n\n\n뉴스\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 1 : 파이썬 설치\n\n\n\n\n\n\n환경구축\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n일치 없음"
+    "text": "정렬\n       디폴트\n         \n          제목\n        \n         \n          날짜 - 날짜(오름차순)\n        \n         \n          날짜 - 날짜(내림차순)\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nCHECK-API 사용량 확인 방법\n\n\n\n\n\n\nCHECK-API 사용법\n\n\n\n\n\n\n\n\n\n2024-01-03\n\n\n\n\n\n\n\n\n\n\n\n\nCHECK-API 사용법 1\n\n\n\n\n\n\nCHECK-API 사용법\n\n\n\n\n\n\n\n\n\n2023-12-21\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 3 : 주피터랩 설치 및 사용\n\n\n\n\n\n\n환경구축\n\n\nPython\n\n\n\n\n\n\n\n\n\n2023-12-12\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 2 : 파이썬 패키지 설치\n\n\n\n\n\n\n환경구축\n\n\nPython\n\n\n\n\n\n\n\n\n\n2023-11-30\n\n\n\n\n\n\n\n\n\n\n\n\n웹사이트 소개\n\n\n\n\n\n\n뉴스\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n\n\n\n\n\n\n환경 구축 1 : 파이썬 설치\n\n\n\n\n\n\n환경구축\n\n\nPython\n\n\n\n\n\n\n\n\n\n2023-11-22\n\n\n\n\n\n\n일치 없음"
   }
 ]

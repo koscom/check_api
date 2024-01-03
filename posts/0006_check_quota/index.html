@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-12-12">
+<meta name="dcterms.date" content="2024-01-03">
 
-<title>CHECK API 활용 - 환경 구축 3 : 주피터랩 설치 및 사용</title>
+<title>CHECK API 활용 - CHECK-API 사용량 확인 방법</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,44 +21,10 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -101,9 +67,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "검색"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gifffer/1.5.0/gifffer.min.js" integrity="sha512-GbNhK/lI2qOfuRjXQsTfI32F9+vNTAx4pEujYKshY6WMOhxiLUi8HDwU2tI7gNpgWQgpgcgMsFgv0f9J9x5c2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
@@ -136,19 +99,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#준비사항" id="toc-준비사항" class="nav-link active" data-scroll-target="#준비사항">준비사항</a></li>
-  <li><a href="#주피터랩jupyterlab-패키지-소개" id="toc-주피터랩jupyterlab-패키지-소개" class="nav-link" data-scroll-target="#주피터랩jupyterlab-패키지-소개">주피터랩(JupyterLab) 패키지 소개</a></li>
-  <li><a href="#주피터랩-설치" id="toc-주피터랩-설치" class="nav-link" data-scroll-target="#주피터랩-설치">주피터랩 설치</a></li>
-  <li><a href="#주피터랩-서버-실행" id="toc-주피터랩-서버-실행" class="nav-link" data-scroll-target="#주피터랩-서버-실행">주피터랩 서버 실행</a></li>
-  <li><a href="#주피터랩-사용" id="toc-주피터랩-사용" class="nav-link" data-scroll-target="#주피터랩-사용">주피터랩 사용</a>
-  <ul class="collapse">
-  <li><a href="#노트북-생성" id="toc-노트북-생성" class="nav-link" data-scroll-target="#노트북-생성">노트북 생성</a></li>
-  <li><a href="#노트북에서-코드-사용" id="toc-노트북에서-코드-사용" class="nav-link" data-scroll-target="#노트북에서-코드-사용">노트북에서 코드 사용</a></li>
-  <li><a href="#노트북에서-문서-사용" id="toc-노트북에서-문서-사용" class="nav-link" data-scroll-target="#노트북에서-문서-사용">노트북에서 문서 사용</a></li>
-  <li><a href="#노트북-저장" id="toc-노트북-저장" class="nav-link" data-scroll-target="#노트북-저장">노트북 저장</a></li>
-  <li><a href="#노트북-종료" id="toc-노트북-종료" class="nav-link" data-scroll-target="#노트북-종료">노트북 종료</a></li>
-  </ul></li>
-  <li><a href="#주피터랩-서버-종료" id="toc-주피터랩-서버-종료" class="nav-link" data-scroll-target="#주피터랩-서버-종료">주피터랩 서버 종료</a></li>
+  <li><a href="#check-api-사용량-제한" id="toc-check-api-사용량-제한" class="nav-link active" data-scroll-target="#check-api-사용량-제한">CHECK-API 사용량 제한</a></li>
+  <li><a href="#check-api-사용량-확인-방법" id="toc-check-api-사용량-확인-방법" class="nav-link" data-scroll-target="#check-api-사용량-확인-방법">CHECK-API 사용량 확인 방법</a></li>
   </ul>
 </nav>
     </div>
@@ -157,10 +109,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">환경 구축 3 : 주피터랩 설치 및 사용</h1>
+<h1 class="title">CHECK-API 사용량 확인 방법</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">환경구축</div>
-    <div class="quarto-category">Python</div>
+    <div class="quarto-category">CHECK-API 사용법</div>
   </div>
   </div>
 
@@ -172,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">작성일</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2023-12-12</p>
+      <p class="date">2024-01-03</p>
     </div>
   </div>
   
@@ -184,200 +135,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>본 글에서는 CHECK-API를 활용하기 위해 필요한 주피터랩(JupyterLab) 패키지를 설치하고 사용하는 법을 설명합니다.</p>
-<section id="준비사항" class="level2">
-<h2 class="anchored" data-anchor-id="준비사항">준비사항</h2>
-<p>여기에서는 컴퓨터에 이미 Mambaforge 기반의 파이썬 배포판이 설치되어 있다고 가정합니다.</p>
-<p>만약 파이썬 배포판이 설치되어 있지 않은 경우에는 다음 블로그 글을 참고하여 설치해 주세요.</p>
-<ul>
-<li><a href="../../posts/0002_env_install_1/index.html" target="_blank">환경 구축 1 : 파이썬 설치</a></li>
-</ul>
-<p>또한 이 글에서 설명하는 파이썬 명령을 사용하려면 윈도우 실행 메뉴에서 “Miniforge3” &gt; “Miniforge Prompt” 메뉴를 선택하여 Miniforge 프롬프트를 시작해야 합니다.</p>
-</section>
-<section id="주피터랩jupyterlab-패키지-소개" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="주피터랩jupyterlab-패키지-소개">주피터랩(JupyterLab) 패키지 소개</h2>
-<p>주피터랩(JupyterLab)은 주피터 노트북(Jupyter Notebook)이라는 패키지의 발전된 버전으로 파이썬 코드 실행과 문서작성을 동시에 할 수 있는 노트북 형태의 웹브라우저 환경을 제공하는 패키지로 다음과 같은 특징을 가집니다.</p>
-<ul>
-<li>웹화면에서 파이썬 코드를 작성하고 실행된 코드의 결과는 해당 웹화면에서 바로 볼 수 있습니다.</li>
-<li>상호작용(interaction)이 가능한 웹 시각화를 쉽게 구현할 수 있습니다.</li>
-<li>하나의 노트북 내에 코드 뿐 아니라 마크다운 형식의 문서를 작성할 수 있습니다.</li>
-</ul>
-<p>주피터랩에 대한 자세한 설명은 공식 웹사이트를 참조하시기 바랍니다.</p>
-<ul>
-<li><a href="https://jupyterlab.readthedocs.io/en/latest/" target="_blank">https://jupyterlab.readthedocs.io/en/latest/</a></li>
-</ul>
-<p>금융 데이터 분석의 경우 다양한 분석코드를 수시로 실행하여 결과를 빠르게 검토하고 그 결과를 공유해야 하는 경우가 많으므로 다른 프로그램 개발과정과 달리 짧은 코드를 쉽게 실행하고 결과를 웹화면에서 바로 시각화하여 볼 수 있는 주피터 노트북의 사용이 유리하므로 설치를 권장드립니다.</p>
-<p>본 블로그에서는 주피터랩을 기반으로 CHECK-API를 사용한 금융 데이터 분석의 예제를 소개하므로 주피터랩을 설치하면 본 블로그의 예제를 바로 실행할 수 있습니다.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="JupyterLab00.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">그림 1: 주피터랩 실행 화면</figcaption>
-</figure>
-</div>
-</section>
-<section id="주피터랩-설치" class="level2">
-<h2 class="anchored" data-anchor-id="주피터랩-설치">주피터랩 설치</h2>
-<p>주피터랩 패키지는 다음과 같이 <code>pip</code> 명령으로 설치할 수 있습니다.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">pip</span> install jupyterlab</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>pip 명령의 사용 방법에 대해서는 다음 블로그 글을 참고해 주세요.</p>
-<ul>
-<li><a href="../../posts/0003_env_install_2/index.html" target="_blank">환경 구축 2 : 파이썬 패키지 설치</a></li>
-</ul>
-</section>
-<section id="주피터랩-서버-실행" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="주피터랩-서버-실행">주피터랩 서버 실행</h2>
-<p>주피터랩은 웹기반 애플리케이션이므로 주피터랩을 사용하기 위해서는 먼저 웹서버 역할을 하는 주피터랩 서버를 실행해야 합니다.</p>
-<p>주피터랩 서버를 실행하려면 파이썬 실행이 가능한 Miniforge 프롬프트나 터미널 환경을 열고 작업 디렉토리로 이동한 다음 다음 명령을 실행합니다.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">jupyter</span> lab</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>정상적으로 실행된다면 다음과 같은 메세지가 나옵니다. (세부적인 사항은 본 예제의 결과와 다를 수 있습니다.)</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">...</span><span class="er">(</span><span class="ex">생략</span><span class="kw">)</span><span class="ex">...</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="ex">[I</span> 2023-12-12 14:25:09.870 ServerApp] Jupyter Server 2.12.1 is running at:</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="ex">[I</span> 2023-12-12 14:25:09.870 ServerApp] http://localhost:8888/lab<span class="pp">?</span>token=8248ef069e8f3c9eeb48c584bb54c4a0fa0b33af02a5fa83</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">[I</span> 2023-12-12 14:25:09.886 ServerApp]     http://127.0.0.1:8888/lab<span class="pp">?</span>token=8248ef069e8f3c9eeb48c584bb54c4a0fa0b33af02a5fa83</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="ex">[I</span> 2023-12-12 14:25:09.886 ServerApp] Use Control-C to stop this server and shut down all kernels <span class="er">(</span><span class="ex">twice</span> to skip confirmation<span class="kw">)</span><span class="bu">.</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="ex">[C</span> 2023-12-12 14:25:09.964 ServerApp]</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a>    <span class="ex">To</span> access the server, open this file in a browser:</span>
-<span id="cb3-10"><a href="#cb3-10"></a>        <span class="ex">file:///C:/Users/KOSCOM/AppData/Roaming/jupyter/runtime/jpserver-276-open.html</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>    <span class="ex">Or</span> copy and paste one of these URLs:</span>
-<span id="cb3-12"><a href="#cb3-12"></a>        <span class="ex">http://localhost:8888/lab?token=8248ef069e8f3c9eeb48c584bb54c4a0fa0b33af02a5fa83</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>        <span class="ex">http://127.0.0.1:8888/lab?token=8248ef069e8f3c9eeb48c584bb54c4a0fa0b33af02a5fa83</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="ex">...</span><span class="er">(</span><span class="ex">생략</span><span class="kw">)</span><span class="ex">...</span></span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>마지막 행에 보이는 것이 주피터랩을 실행할 수 있는 URL 주소입니다. 이 주소를 복사하여 웹브라우저의 주소창에 넣으면 웹프라우저에 다음과 같은 주피터랩 최초 실행 화면이 나옵니다.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="JupyterLab01.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">그림 2: 주피터랩 최초 실행 화면</figcaption>
-</figure>
-</div>
-</section>
-<section id="주피터랩-사용" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="주피터랩-사용">주피터랩 사용</h2>
-<section id="노트북-생성" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="노트북-생성">노트북 생성</h3>
-<p>주피터랩에서 코드를 실행하거나 문서를 작성하러면 노트북 파일을 생성해야 합니다.</p>
-<p>주피터랩 화면의 메뉴에서</p>
-<blockquote class="blockquote">
-<p>“File” &gt; “New” &gt; “Notebook”</p>
-</blockquote>
-<p>메뉴를 선택하거나 화면상에서</p>
-<blockquote class="blockquote">
-<p>“Notebook” &gt; “Python 3 (ipykernel)”</p>
-</blockquote>
-<p>이라고 쓰인 버튼을 클릭하면 다음 화면과 같이 신규 노트북이 생성됩니다.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="JupyterLab02.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">그림 3: 주피터랩 노트북 생성 화면</figcaption>
-</figure>
-</div>
-</section>
-<section id="노트북에서-코드-사용" class="level3">
-<h3 class="anchored" data-anchor-id="노트북에서-코드-사용">노트북에서 코드 사용</h3>
-<p>노트북화면의 셀(cell)에서 파이썬 코드를 입력하고 Shift 버튼과 Enter 버튼을 동시에 누르면 코드가 실행되고 샐의 마지막 행에 있는 파이썬 변수의 값이 표시됩니다. Enter 버튼만 누르는 경우에는 코드 입력 라인이 바뀌뿐 코드가 실행되지는 않습니다.</p>
-<p>예를 들어 다음과 같이 입력하면 값이 0으로 채워진 Pandas 데이터프레임을 생성하고 그 결과를 보여줍니다.</p>
-<div id="cell-20" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>df <span class="op">=</span> pd.DataFrame(np.zeros(<span class="dv">5</span>))</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>df</span></code><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<p>본 글에서는 CHECK-API의 사용량을 확인하는 방법을 설명합니다.</p>
+<section id="check-api-사용량-제한" class="level2">
+<h2 class="anchored" data-anchor-id="check-api-사용량-제한">CHECK-API 사용량 제한</h2>
+<p>CHECK-API는 사용 요금제에 따라 사용량을 제한하고 있습니다. 각 요금제에 따른 사용량 제한은 다음과 같습니다.</p>
+<table class="table">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">0</th>
+<th>분류</th>
+<th>LEVEL</th>
+<th>일간 API 사용량</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>0.0000</td>
+<td>CHECK 사용자</td>
+<td>BASIC</td>
+<td>0.2 GB / 일</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>0.0000</td>
+<td>-</td>
+<td>PLUS</td>
+<td>0.5 GB / 일</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.0000</td>
+<td>CHECK 미사용자</td>
+<td>Lv.1</td>
+<td>1.0 GB / 일</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>0.0000</td>
+<td>-</td>
+<td>Lv.2</td>
+<td>5.0 GB / 일</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>0.0000</td>
+<td>-</td>
+<td>Lv.3</td>
+<td>10.0 GB / 일</td>
 </tr>
 </tbody>
 </table>
-
-</div>
-</div>
-</div>
+<p>사용량을 초과하여 사용하는 경우 별도의 공지 없이 사용이 제한될 수도 있으므로 사용에 유의해 주시기 바랍니다.</p>
 </section>
-<section id="노트북에서-문서-사용" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="노트북에서-문서-사용">노트북에서 문서 사용</h3>
-<p>노트북에 코드가 아닌 문서를 넣기 위헤서는 셀을 “Code” 유형에서 “Markdown” 유형으로 변경해야 합니다. 셀 유형을 변경하려면 유형을 변경할 셀을 선택한 후 노트북 상단 버튼에서 “Code”라고 표시되어 있는 버튼을 클릭하여 “Markdown”으로 바꿉니다.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="JupyterLab03.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">그림 4: 주피터랩 노트북에서 셀 유형 변경</figcaption>
-</figure>
-</div>
-<p>셀 유형이 “Markdown”으로 바뀌면 Markdown 형식으로 문서를 작성할 수 있습니다. Markdown 형식은 간단한 문서작성을 위한 문법으로 사용법은 다음 웹사이트를 참조하시면 됩니다.</p>
+<section id="check-api-사용량-확인-방법" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="check-api-사용량-확인-방법">CHECK-API 사용량 확인 방법</h2>
+<p>CHECK-API 사용량은 CHECK-API 공식 홈페이지에서 로그인하여 확인할 수 있습니다.</p>
 <ul>
-<li><a href="https://ko.wikipedia.org/wiki/마크다운" target="_blank">https://ko.wikipedia.org/wiki/마크다운</a></li>
+<li><a href="https://checkapi.koscom.co.kr/" target="_blank">https://checkapi.koscom.co.kr/</a></li>
 </ul>
+<ol type="1">
+<li>홈페이지에 ID와 인증키(API-KEY) 값을 입력하여 로그인합니다.</li>
+</ol>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="JupyterLab04.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">그림 5: 주피터랩 노트북에서 마크다운 문서 작성</figcaption>
+<p><img src="check_api_quota_1.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 1: CHECK-API 홈페이지 로그인 화면</figcaption>
 </figure>
 </div>
-<p>마크다운 문서를 작성한 후에 코드 실행의 경우와 마찬가지로 Shift + Enter 버튼을 누르면 원하는 형식으로 표시됩니다.</p>
+<ol start="2" type="1">
+<li>로그인 후 나타나는 우측 상단의 아이디 부분을 클릭합니다.</li>
+</ol>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="JupyterLab05.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">그림 6: 주피터랩 노트북에서 마크다운 문서 표시</figcaption>
+<p><img src="check_api_quota_2.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 2: 사용량 확인 방법</figcaption>
 </figure>
 </div>
-</section>
-<section id="노트북-저장" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="노트북-저장">노트북 저장</h3>
-<p>노트북을 저장하려면 상단 메뉴에서</p>
-<blockquote class="blockquote">
-<p>“File” &gt; “Save Notebook”</p>
-</blockquote>
-<p>메뉴를 선택합니다.</p>
-<p>신규로 생성된 노트북의 경우 다음과 같이 파일 이름을 변경하는 다이얼로그가 나타납니다. 이 다이얼로그에서 원하는 이름으로 변경할 수 있습니다.</p>
+<ol start="3" type="1">
+<li>1일 사용한도 및 현재 당일 사용량 등의 사용 정보가 표시됩니다.</li>
+</ol>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="JupyterLab06.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">그림 7: 주피터랩 노트북 저장</figcaption>
+<p><img src="check_api_quota_3.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">그림 3: CHECK-API 사용량 확인 화면</figcaption>
 </figure>
 </div>
-</section>
-<section id="노트북-종료" class="level3">
-<h3 class="anchored" data-anchor-id="노트북-종료">노트북 종료</h3>
-<p>완성된 노트북을 종료하기 위해서는 상단 메뉴에서</p>
-<blockquote class="blockquote">
-<p>“File” &gt; “Close and Shut Down Notebook”</p>
-</blockquote>
-<p>메뉴를 선택합니다.</p>
-</section>
-</section>
-<section id="주피터랩-서버-종료" class="level2">
-<h2 class="anchored" data-anchor-id="주피터랩-서버-종료">주피터랩 서버 종료</h2>
-<p>주피터랩 사용이 완전히 끝난 후에는 주피터랩 웹 서버를 종료할 수 있습니다. 서버를 종료하려면 주피터랩 서버를 가동시킨 터미널 화면을 종료하거나 터미널에서 Control + C 버튼을 두번 연속 누르면 됩니다.</p>
 
 
 </section>
